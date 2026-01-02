@@ -1,19 +1,36 @@
-# Reaction-Rate Neural Network (Chemistry + Machine Learning)
+# Neural Network Prediction of Chemical Reaction Rates
 
-This project trains a neural network to predict reaction rates using temperature, pressure, and concentration as inputs.
+**One-Liner:**  
+From chemistry formula to AI prediction — see kinetics in action!
 
-## Key Features
-- Built from scratch using Python + scikit-learn  
-- Combines chemistry kinetics with machine learning  
-- Predicts reaction rates from input variables  
-- Teaches model architecture, data preprocessing, and evaluation  
+---
 
-## File Structure
-src/model.py # Neural network model
-data/dataset.csv # Training data
-README.md # Project description
-## Future Work
-- Add real reaction data  
-- Tune hyperparameters  
-- Add graphs for prediction accuracy  
-- Build a web-based predictor 
+## Overview
+
+This project demonstrates how chemical reaction rates can be predicted using a neural network trained on synthetic data generated from the **Arrhenius equation**.  
+
+It is designed for educational or exhibition purposes, highlighting the intersection of classical chemistry and modern AI.
+
+**Key Features:**
+- Generate synthetic reaction rate data using Arrhenius formula.
+- Train a neural network to predict reaction rates.
+- Interactive visualization through **Gradio/Streamlit app**.
+- Ready for exhibition with screenshots, quickstart, and poster line.
+
+---
+
+## How It Works
+
+1. **Data Generation**  
+   - `generate_data.py` creates a dataset of temperature vs. reaction rates using the Arrhenius equation.  
+
+2. **Model Training**  
+   - `train_model.py` trains a neural network on the synthetic dataset.  
+
+3. **Interactive Demo**  
+   - `run_app.py` launches a Gradio/Streamlit app where users can input temperature and instantly see predicted reaction rates.  
+
+
+
+**Pipeline Diagram:**
+
