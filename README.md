@@ -1,5 +1,5 @@
-# Predicting Reaction Rates with Neural Networks:  
-## A Study on When Machine Learning Does *Not* Add Scientific Value
+# Predicting Reaction Rates with Neural Networks  
+## A Study on When Machine Learning Does Not Add Scientific Value
 
 **Author:** Muhammad Sarim Nawaz  
 **Institution:** Cadet College Hasanabdal  
@@ -8,106 +8,146 @@
 
 ## Overview
 
-This project explores the use of a neural network to predict chemical reaction rates using synthetic data generated from the Arrhenius equation. Rather than positioning machine learning as a superior alternative, the goal of this study is to **critically evaluate whether machine learning is justified when the governing physical law is already known**.
+This project investigates the use of a neural network to predict chemical reaction rate constants using synthetic data generated from the Arrhenius equation. Rather than positioning machine learning as a superior alternative, the objective is to critically evaluate whether machine learning adds scientific or epistemic value when the governing physical law is already known, interpretable, and analytically solvable.
 
-The project intentionally uses a well-understood kinetic model to test the limits, redundancy, and interpretability trade-offs of neural networks in scientific modeling.
+The project is designed as a methodological case study examining redundancy, interpretability loss, and extrapolation behavior when a black-box model is applied to a system governed by established theory.
 
 ---
 
 ## Motivation
 
-Machine learning is increasingly applied to scientific problems where strong theoretical models already exist. While neural networks can approximate complex functions, their use is not always epistemically or practically justified.
+Machine learning is increasingly applied to scientific problems where strong theoretical models already exist. While neural networks are powerful function approximators, their application is not always epistemically or practically justified.
 
-This project asks a simple but often ignored question:
+This project addresses a fundamental question:
 
-> **What does machine learning actually add when the underlying relationship is already known, interpretable, and analytically solvable?**
+**What does machine learning actually add when the underlying relationship is known, interpretable, and grounded in physical theory?**
+
+Rather than assuming value, this work evaluates machine learning against classical methods under controlled conditions.
 
 ---
 
 ## Methodology
 
 ### Data Generation
-- Synthetic reaction rate data generated using the Arrhenius equation  
-- Parameters sampled across realistic temperature and activation energy ranges  
+
+- Synthetic reaction rate data generated using the Arrhenius equation:
+
+  \[
+  k = A e^{-E_a / RT}
+  \]
+
+- Parameters sampled across physically realistic temperature and activation energy ranges  
 - No experimental data used (deliberate design choice)
 
-### Models Compared
-1. **Classical Arrhenius-based regression**
-2. **Feedforward neural network**
-   - Trained on the same synthetic dataset
-   - Optimized for mean squared error
+Synthetic data ensures that the true functional relationship is known, allowing direct evaluation of whether the neural network recovers structure rather than noise.
 
-### Evaluation
-- Prediction accuracy on interpolated data
-- Extrapolation behavior outside the training range
-- Qualitative comparison of interpretability and scientific usefulness
+---
+
+### Models Compared
+
+#### Physics-Based Model
+- Classical Arrhenius model
+- Parameters \(A\) and \(E_a\) estimated via nonlinear least squares
+- Trained on the same dataset as the neural network
+
+#### Neural Network
+- Feedforward neural network
+- Inputs: Temperature (T), Activation Energy (Ea), Pre-exponential factor (A)
+- Output: Reaction rate constant (k)
+- Architecture:
+  - 2 hidden layers
+  - 32 units per layer
+  - ReLU activations
+  - ~2,000 trainable parameters
+- Optimized using mean squared error loss
+
+No physical equations or constraints were explicitly encoded in the neural network.
+
+---
+
+## Evaluation Criteria
+
+Models were evaluated on:
+
+- Prediction accuracy on interpolated data  
+- Extrapolation behavior outside the training temperature range  
+- Qualitative comparison of interpretability and scientific usefulness  
+
+Key plots and comparisons are provided in:
+- `notebooks/training_comparison.ipynb`
+- `notebooks/extrapolation_analysis.ipynb`
 
 ---
 
 ## Key Findings
 
-- The neural network successfully learns the Arrhenius relationship **but does not outperform classical regression in accuracy or generalization**.
-- The NN acts as a *black-box approximator* of a known equation rather than a source of new insight.
-- Extrapolation performance of the neural network is unreliable compared to the physics-based model.
-- Interpretability is significantly reduced when replacing an explicit equation with a neural network.
+- The neural network successfully approximates the Arrhenius relationship within the training domain.
+- Prediction accuracy does not exceed that of the physics-based model.
+- Extrapolation performance of the neural network is unstable compared to the Arrhenius model (see extrapolation plots).
+- Interpretability is significantly reduced when replacing an explicit equation with a black-box model.
+
+These results indicate that the neural network acts primarily as a function approximator of a known law rather than a source of new scientific insight.
 
 ---
 
 ## Interpretation
 
-This project demonstrates that **technical capability alone is not sufficient justification for using machine learning in scientific contexts**.
+This project demonstrates that technical capability alone does not justify the use of machine learning in scientific modeling.
 
 When:
 - the governing law is known,
 - the model is interpretable,
-- and extrapolation is required,
+- and extrapolation beyond observed data is required,
 
-classical approaches remain superior.
+classical physics-based approaches remain superior.
 
-The neural network, in this setting, adds computational complexity without adding epistemic value.
+In this context, the neural network adds computational complexity without adding explanatory or epistemic value.
 
 ---
 
 ## Why This Project Matters
 
 Rather than showcasing machine learning as a novelty, this work emphasizes:
-- Scientific restraint
-- Model selection judgment
-- Critical evaluation of ML applicability
 
-These considerations are central to responsible scientific and engineering practice, particularly as machine learning becomes increasingly accessible.
+- Scientific restraint  
+- Model selection judgment  
+- Critical evaluation of ML applicability  
+
+These considerations are essential for responsible scientific practice, particularly as machine learning tools become increasingly accessible.
 
 ---
 
 ## Limitations
 
-- Synthetic data only; no experimental noise modeled
-- Single-reaction system
-- Neural network architecture kept intentionally simple
+- Synthetic data only; experimental noise not modeled  
+- Single-reaction system  
+- Neural network architecture intentionally kept simple  
 
-These limitations are **acknowledged rather than obscured**, as the objective is methodological evaluation, not performance maximization.
+These limitations are acknowledged explicitly, as the goal is methodological evaluation rather than performance maximization.
 
 ---
 
 ## Future Directions
 
-- Introducing experimental noise to test robustness
-- Evaluating transfer learning across multiple reaction systems
-- Studying cases where Arrhenius assumptions break down
+- Introduce controlled experimental noise to assess robustness  
+- Evaluate transfer learning across multiple reaction systems  
+- Study regimes where Arrhenius assumptions break down  
+
+Such extensions would help identify conditions under which machine learning may offer genuine advantages.
 
 ---
 
 ## Conclusion
 
-This project serves as a controlled case study illustrating that **machine learning should be applied selectively, not reflexively**. Its value lies not in outperforming established models, but in clarifying *when* such models should remain the default.
+This project serves as a controlled case study illustrating that machine learning should be applied selectively rather than reflexively. Its value lies not in outperforming established models, but in clarifying when those models should remain the default. The scientific contribution is therefore methodological: identifying the boundary between useful approximation and unnecessary complexity.
 
 ---
 
-## Repository Contents
+## Repository Structure
 
-- `data/` — Synthetic datasets generated from Arrhenius equation  
+- `data/` — Synthetic datasets generated from the Arrhenius equation  
 - `models/` — Neural network implementation  
-- `notebooks/` — Training, evaluation, and comparison analyses  
+- `notebooks/` — Training, evaluation, and extrapolation analyses  
 - `README.md` — Project overview and interpretation  
 
 
