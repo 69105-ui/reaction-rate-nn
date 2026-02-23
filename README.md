@@ -2,7 +2,7 @@
 ## A Study on When Machine Learning Does Not Add Scientific Value
 
 **Author:** Muhammad Sarim Nawaz  
-**Affiliation:** Independant 
+**Affiliation:** Independent 
 
 ---
 
